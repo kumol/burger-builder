@@ -1,29 +1,29 @@
 import React from "react";
-import classes from "./Ingredients.css";
+import "./Ingredients.css";
 //import PropTypes from 'prop-types';
 const Ingredients = (props) => {
     let ingredients = null;
     switch(props.type){
-        case("BreadBottom"):
-            ingredients = <div className={classes.BreadBottom}>BreadBottom</div>
+        case("bread-bottom"):
+            ingredients = <div className="BreadBottom"></div>
             break;
         case ('bread-top') :
-            ingredients = (<div className={classes.BreadTop}>
-                <div className={classes.salad1}></div>
-                <div className={classes.salad2}></div>
+            ingredients = (<div className="BreadTop">
+                <div className="salad1"></div>
+                <div className="salad2"></div>
             </div>);
             break;
         case ('meat') :
-            ingredients = <div className={classes.Meat}></div>
+            ingredients = <div className="Meat"></div>
             break;
         case ('cheese') :
-            ingredients = <div className={classes.Cheese}></div>
+            ingredients = <div className="Cheese"></div>
             break;
         case ('bacon') :
-            ingredients = <div className={classes.Bacon}></div>
+            ingredients = <div className="Bacon"></div>
             break;
         case ('salad') :
-            ingredients = <div className={classes.Salad}></div>
+            ingredients = <div className="Salad"></div>
             break;
         default:
             ingredients = null;
