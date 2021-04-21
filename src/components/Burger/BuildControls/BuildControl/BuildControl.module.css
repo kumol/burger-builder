@@ -5,24 +5,29 @@
   margin: 5px 0;
 }
 
-.BuildControl .Button {
+.Button,
+.More,
+.Less {
   display: block;
   padding: 5px;
   width: 90px;
   margin: 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
   border: 1px solid #aa6817;
   cursor: pointer;
   outline: none;
 }
 
-.BuildControl .More {
-  background-color: red;
+.More {
+  background-color: rgb(72, 181, 253);
 }
 
-.BuildControl .Less {
-  background-color: greenyellow;
+.Less {
+  background-color: rgb(241, 43, 43);
 }
 
-.BuildControl .Label {
+.Label {
   color: indigo;
 }

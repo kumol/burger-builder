@@ -9,7 +9,6 @@ const Burger = (props)=>{
     }).reduce((el,ne)=>{
         return el.concat(ne);
     },[]);
-    console.log(mixIng);
     if (mixIng.length === 0) {
         mixIng = <p>please add the ing</p>
     }
