@@ -20,7 +20,8 @@ const BuildControls = (params) => (
                 disable={params.disable[con.type]} />
             })
         }
-        <button className={classes.OrderButton} disabled={!params.purchable}>Order Now</button>
+        <button onClick={()=>{params.purchaseHandler()}}
+            className={classes.OrderButton} disabled={!params.purchable}>Order Now</button>
     </div>
 )
 
