@@ -9,14 +9,18 @@ const controls=[
 ]
 const BuildControls = (params) => (
     <div className={classes.BuildControls}>
-
-        <p>price {params.disable["salad"].toString()}</p>
         <p>Current Price <strong>{params.price}</strong></p>
         {
             controls.map(con=>{
-                return <BuildControl key={con.label} label={con.label} remove={()=>params.ingredientsRemove(con.type)} added={()=>{params.ingredientsAdd(con.type)}} disable={params.disable[con.type]} />
+                return <BuildControl 
+                key={con.label}
+                label={con.label}
+                remove={()=>params.ingredientsRemove(con.type)}
+                added={()=>{params.ingredientsAdd(con.type)}}
+                disable={params.disable[con.type]} />
             })
         }
+        <button className={classes.OrderButton} disabled={!params.purchable}>Order Now</button>
     </div>
 )
 

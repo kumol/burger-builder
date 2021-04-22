@@ -31,3 +31,19 @@
 .Label {
   color: indigo;
 }
+
+.Less:hover,
+.Less:active,
+.More:hover,
+.More:active {
+  background-color: #a0db41;
+  border: 1px solid #966909;
+  color: #966909;
+}
+
+.Less:disabled {
+  background-color: #c7c6c6;
+  cursor: not-allowed;
+  border: 1px solid #ccc;
+  color: #888888;
+}
