@@ -82,25 +82,13 @@ class BurgerBuilder extends Component{
         //     isLoading:true,
         // })
 
-        // const order = {
-        //     ingredients:this.state.ingredients,
-        //     price:this.state.totalPrice,
-        //     customer:{
-        //         name:"Kumol Bhoumik",
-        //         address:{
-        //             house:"455",
-        //             city:"Dhaka",
-        //             country:"Bangladesh"
-        //         },
-        //         deliveryMethod:"Fastest"
-        //     }
-        // }
+        
         const queryParams = []
         for(let i in this.state.ingredients){
             queryParams.push(encodeURIComponent(i)+"="+encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push(encodeURIComponent("price")+"="+encodeURIComponent(this.state.totalPrice));
         const queryString = queryParams.join("&");
-
         this.props.history.push({
             pathname:"/checkout/",
             search:"?"+queryString
@@ -110,18 +98,7 @@ class BurgerBuilder extends Component{
             purchasing:false
         })
         
-        // axios.post("/orders.json",order).then(response=>{
-        //     console.log(response);
-        //     this.setState({
-        //         isLoading:false,
-        //         purchasing:false
-        //     });
-                
-        // }).catch(err=>{
-        //     this.setState({
-        //         isLoading:false,
-        //     })
-        //});
+        
         //alert("You Continuing purchase");
     }
     render(){
