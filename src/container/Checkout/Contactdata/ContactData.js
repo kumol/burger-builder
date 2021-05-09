@@ -88,7 +88,12 @@ class ContactData extends Component {
         const form = this.state.isLoading ? <Spinner/>:<form>
             {
                 orderForm.map(form=>{
-                    return <Input key={form.id} elementType={form.config.elementType} elementConfig={form.config.elementConfig} value={form.value}/>
+                    return (
+                        <Input key={form.id}
+                            elementType={form.config.elementType} 
+                            elementConfig={form.config.elementConfig}
+                            value={form.value}/>
+                    )               
                 })
             }
             {/* <Input elementType={this.state.elementType} elementConfig={this.state.elementConfig} value={this.state.value} />
