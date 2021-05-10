@@ -53,19 +53,14 @@ class ContactData extends Component {
         this.setState({
             isLoading:true
         })
+        const formData={};
+        for(let key in this.state.orderForm){
+            formData[key] = this.state.orderForm[key].value;
+        }
         const order = {
             ingredients:this.props.ingredients,
             price:this.props.price,
-            customer:{
-                name:this.state.name,
-                email:this.state.email,
-                address:{
-                    postCode:this.state.postCode,
-                    city:"Dhaka",
-                    country:"Bangladesh"
-                },
-                deliveryMethod:this.state.deliveryMethod
-            }
+            orderForm:formData
         }
         console.log(order);
         axios.post("/orders.json",order).then(response=>{
@@ -80,15 +75,16 @@ class ContactData extends Component {
         //this.props.history.push("/");
     }
     inputValueChanger=(event,id)=>{
-        console.log(event.target.value);
-        console.log(id);
-        const inputField = this.state.orderForm[id];
-        const updateOrder = this.state.orderForm;
-        inputField["value"] = event.target.value;
-        updateOrder[id] = inputField;
+        const updateOrder = {...this.state.orderForm};
+        const updateElement = {...updateOrder[id]}
+        updateElement.value = event.target.value;
+        updateOrder[id] = updateElement;
         this.setState({
             orderForm:updateOrder
-        });
+        })
+        // this.setState({
+        //     orderForm:updateOrder
+        // });
     }
     render(){
         const orderForm = [];
