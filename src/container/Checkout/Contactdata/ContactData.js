@@ -18,6 +18,7 @@ class ContactData extends Component {
                     required:true,
                     minLength:3
                 },
+                touched:false,
                 validated:false
             },
             email:{
@@ -31,6 +32,7 @@ class ContactData extends Component {
                     required:true,
                     minLength:3
                 },
+                touched:false,
                 validated:false
             },
             street:{
@@ -44,6 +46,7 @@ class ContactData extends Component {
                     required:true,
                     minLength:3
                 },
+                touched:false,
                 validated:false
             },
             postCode:{
@@ -57,6 +60,7 @@ class ContactData extends Component {
                     required:true,
                     minLength:3
                 },
+                touched:false,
                 validated:false
             },
             deliveryMethod:{
@@ -64,12 +68,7 @@ class ContactData extends Component {
                 elementConfig:{
                     option:[{value:"fastest",displayValue:"Fastest"},{value:"cheapest",displayValue:"Cheapest"}]
                 },
-                value:"fastest",
-                validator:{
-                    required:true,
-                    minLength:3
-                },
-                validated:false
+                value:"fastest"
             }
         },
         isLoading:false
@@ -103,12 +102,12 @@ class ContactData extends Component {
         const updateOrder = {...this.state.orderForm};
         const updateElement = {...updateOrder[id]}
         updateElement.value = event.target.value;
+        updateElement.touched = true;
         updateElement.validated = this.isValidated(updateElement.value,updateElement.validator);
         updateOrder[id] = updateElement;
         this.setState({
             orderForm:updateOrder
         });
-        console.log(updateElement);
     }
     isValidated=(value,tools)=>{
         let isValid=false;
@@ -135,7 +134,10 @@ class ContactData extends Component {
                         <Input key={form.id}
                             elementType={form.config.elementType} 
                             elementConfig={form.config.elementConfig}
-                            value={form.value}
+                            value={form.config.value}
+                            isValid={!form.config.validated}
+                            shouldValidate={form.config.validator}
+                            touched= {form.config.touched}
                             onChange={(e)=>{this.inputValueChanger(e,form.id)}}/>
                     )               
                 })
