@@ -57,15 +57,17 @@ class ContactData extends Component {
             ingredients:this.props.ingredients,
             price:this.props.price,
             customer:{
-                name:"Kumol Bhoumik",
+                name:this.state.name,
+                email:this.state.email,
                 address:{
-                    house:"455",
+                    postCode:this.state.postCode,
                     city:"Dhaka",
                     country:"Bangladesh"
                 },
-                deliveryMethod:"Fastest"
+                deliveryMethod:this.state.deliveryMethod
             }
         }
+        console.log(order);
         axios.post("/orders.json",order).then(response=>{
             this.setState({
                 isLoading:false
@@ -75,7 +77,18 @@ class ContactData extends Component {
                 isLoading:false,
             });
         });
-        this.props.history.push("/");
+        //this.props.history.push("/");
+    }
+    inputValueChanger=(event,id)=>{
+        console.log(event.target.value);
+        console.log(id);
+        const inputField = this.state.orderForm[id];
+        const updateOrder = this.state.orderForm;
+        inputField["value"] = event.target.value;
+        updateOrder[id] = inputField;
+        this.setState({
+            orderForm:updateOrder
+        });
     }
     render(){
         const orderForm = [];
@@ -92,7 +105,8 @@ class ContactData extends Component {
                         <Input key={form.id}
                             elementType={form.config.elementType} 
                             elementConfig={form.config.elementConfig}
-                            value={form.value}/>
+                            value={form.value}
+                            onChange={(e)=>{this.inputValueChanger(e,form.id)}}/>
                     )               
                 })
             }
