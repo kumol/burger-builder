@@ -68,9 +68,11 @@ class ContactData extends Component {
                 elementConfig:{
                     option:[{value:"fastest",displayValue:"Fastest"},{value:"cheapest",displayValue:"Cheapest"}]
                 },
-                value:"fastest"
+                value:"fastest",
+                validated:true
             }
         },
+        formIsValid:false,
         isLoading:false
     }
     confirmOrder=()=>{
@@ -86,7 +88,6 @@ class ContactData extends Component {
             price:this.props.price,
             orderForm:formData
         }
-        console.log(order);
         axios.post("/orders.json",order).then(response=>{
             this.setState({
                 isLoading:false
@@ -103,10 +104,15 @@ class ContactData extends Component {
         const updateElement = {...updateOrder[id]}
         updateElement.value = event.target.value;
         updateElement.touched = true;
-        updateElement.validated = this.isValidated(updateElement.value,updateElement.validator);
+        updateElement.validated = id ==="deliveryMethod" ? true : this.isValidated(updateElement.value,updateElement.validator);
         updateOrder[id] = updateElement;
+        let isValid = true;
+        for(let form in updateOrder){
+            isValid = updateOrder[form].validated && isValid;
+        }
         this.setState({
-            orderForm:updateOrder
+            orderForm:updateOrder,
+            formIsValid:isValid
         });
     }
     isValidated=(value,tools)=>{
@@ -146,7 +152,7 @@ class ContactData extends Component {
             <Input  inputtype="input"  type="email" name="email" placeholder="Enter email"/>
             <Input  inputtype="input" type="text" name="street" placeholder="Enter street"/>
             <Input  inputtype="input" type="text" name="postcode" placeholder="Enter postcode"/> */}
-            <Button type="Success" clicked={this.confirmOrder}> Order  </Button>
+            <Button type="Success" disabled={!this.state.formIsValid} clicked={this.confirmOrder}> Order  </Button>
         </form>;
         return(
             <div className={classes.ContactData}>
