@@ -7,6 +7,8 @@ import Aux from "../../hoc/Aux/Aux";
 import WithErrorHandler from "../../hoc/WithErrorHandler/WithErrorHandler";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import Connect from "react-redux";
+import * as actionTypes from "../../store/action";
 
 const ingredientsPrice = {
     salad:0.4,
@@ -144,6 +146,19 @@ class BurgerBuilder extends Component{
             </Aux>
         );
     };
+}
+
+const mapStateToProps = (state)=> {
+    return {
+        ing:state.ingredients
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        onIngredientToAdd : (ingName) => dispatch({type:actionTypes.ADD_INGREDIENT, ingredientName: ingName}),
+        onIngredientToRemove : (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName: ingName})
+    }
 }
 
 export default WithErrorHandler(BurgerBuilder,axios);
