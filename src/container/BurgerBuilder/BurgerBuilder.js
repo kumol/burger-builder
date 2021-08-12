@@ -74,22 +74,19 @@ class BurgerBuilder extends Component{
         // })
 
         
-        const queryParams = []
-        for(let i in this.state.ingredients){
-            queryParams.push(encodeURIComponent(i)+"="+encodeURIComponent(this.state.ingredients[i]));
-        }
-        queryParams.push(encodeURIComponent("price")+"="+encodeURIComponent(this.state.totalPrice));
-        const queryString = queryParams.join("&");
+        // const queryParams = []
+        // for(let i in this.state.ingredients){
+        //     queryParams.push(encodeURIComponent(i)+"="+encodeURIComponent(this.state.ingredients[i]));
+        // }
+        // queryParams.push(encodeURIComponent("price")+"="+encodeURIComponent(this.state.totalPrice));
+        // const queryString = queryParams.join("&");
         this.props.history.push({
-            pathname:"/checkout/",
-            search:"?"+queryString
+            pathname:"/checkout/"
         });
         this.setState({
             isLoading:false,
             purchasing:false
         })
-        
-        
         //alert("You Continuing purchase");
     }
     render(){
